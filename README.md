@@ -1,4 +1,4 @@
-#🌦️ Weather Tracker App
+🌦️ Weather Tracker App
 
 A simple Weather Tracker application built with React + Vite + Tailwind CSS
 
