@@ -7,6 +7,7 @@ function WeatherApp() {
   const [error, setError] = useState(null);
   const [unit, setUnit] = useState("celsius");
   const [coordinates, setCoordinates] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
 
   async function fetchCoordinates(city) {
     try {
@@ -90,6 +91,10 @@ function WeatherApp() {
     setUnit(unit === 'celsius' ? 'fahrenheit' : 'celsius');
   };
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   useEffect(() => {
     if (coordinates) {
       fetchWeatherData(coordinates.latitude, coordinates.longitude);
@@ -97,7 +102,7 @@ function WeatherApp() {
   }, [unit]);
 
   return (
-    <div style={styles.container}>
+    <div style={{ ...styles.container, background: darkMode ? '#333' : '#f3f3f3', color: darkMode ? '#f3f3f3' : '#333' }}>
       <h1 style={styles.title}>🌦️ Weather Tracker</h1>
       <form onSubmit={handleSearch} style={styles.searchForm}>
         <input 
@@ -111,6 +116,9 @@ function WeatherApp() {
       </form>
       <button onClick={toggleUnit} style={styles.toggleButton}>
         Switch to {unit === 'celsius' ? '°F' : '°C'}
+      </button>
+      <button onClick={toggleDarkMode} style={styles.toggleButton}>
+        {darkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
       {error && <p style={styles.error}>{error}</p>}
       {weatherData && (
@@ -127,8 +135,8 @@ function WeatherApp() {
 }
 
 const styles = {
-  container: { padding: '20px', textAlign: 'center', maxWidth: '400px', margin: 'auto', background: '#f3f3f3', borderRadius: '10px' },
-  title: { color: '#333' },
+  container: { padding: '20px', textAlign: 'center', maxWidth: '400px', margin: 'auto', borderRadius: '10px' },
+  title: { marginBottom: '20px' },
   searchForm: { display: 'flex', marginBottom: '10px' },
   searchInput: { flex: 1, padding: '10px', marginRight: '10px' },
   searchButton: { padding: '10px', background: '#4CAF50', color: 'white', border: 'none' },
