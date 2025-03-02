@@ -24,5 +24,6 @@ Toggle between °C & °F for temperature units.
 - Display temperature, humidity, and wind speed
 - Toggle between °C & °F
 - Responsive Design
+- Dark Mode
   
 Thank you
